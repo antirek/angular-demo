@@ -1,3 +1,4 @@
 .jumbotron.text-center
   h3 Hello
-  span {{nerd.name}}    
+  //span {{nerd.name}}
+  a(href="#" editable-text="nerd.name" onaftersave="update(nerd._id, $data)") {{ nerd.name || 'empty' }}

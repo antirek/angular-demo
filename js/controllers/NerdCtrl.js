@@ -39,5 +39,11 @@ angular
 			Nerd.get(id).success(function (data) {
 				$scope.nerd = data;	
 			});
+
+			$scope.update = function (id, data) {
+				console.log(id, data);
+				Nerd.update(id, {name: data});
+				$state.reload();
+			};
 		}
 	]);
