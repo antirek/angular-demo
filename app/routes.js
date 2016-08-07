@@ -47,5 +47,13 @@ module.exports = function(app) {
 		});
 	});
 
+	app.get('/api/nerds/:id', function (req, res) {
+		var id = req.params.id;
+		console.log('get', id, req.body);
+		Nerd.findById(id, (err, nerd) => {
+			if (err) console.log('err', err);
+			res.json(nerd);
+		});
+	});
 
 };

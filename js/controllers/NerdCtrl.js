@@ -1,22 +1,18 @@
 angular
 	.module('NerdCtrl', ['NerdService', 'xeditable'])
-	.controller('NerdController', [
+	.controller('NerdListController', [
 		'$scope', 
 		'Nerd', 
 		function($scope, Nerd) {
-
-			$scope.user = {
-				name: 'user name'
-			};
 
 			$scope.tagline = 'Nothing beats a pocket protector!';	
 			//$scope.nerds = [{name: 'sad'},{name:'sdsd'}]//Nerd.get();	
 
 			$scope.load = function () {
-				Nerd.get().success(function(data){		
+				Nerd.getAll().success(function(data){		
 					$scope.nerds = data;
 				});
-			}
+			};
 
 			$scope.create = function () {
 				Nerd.create({name: $scope.name});
@@ -26,9 +22,22 @@ angular
 			$scope.update = function (id, data) {
 				console.log(id, data);
 				Nerd.update(id, {name: data});
-			}
+			};
 
 			$scope.load();
 
+		}
+	])
+	.controller('NerdViewController', [
+		'$scope',
+		'$state',
+		'$stateParams', 
+		'Nerd',
+		function($scope, $state, $stateParams, Nerd) {
+
+			var id = $stateParams.id;
+			Nerd.get(id).success(function (data) {
+				$scope.nerd = data;	
+			});
 		}
 	]);

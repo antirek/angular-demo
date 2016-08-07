@@ -4,7 +4,7 @@ angular
         //function($routeProvider, $locationProvider) {
           function ($stateProvider, $urlRouterProvider) {
 
-          $urlRouterProvider.otherwise("/nerds");
+          //$urlRouterProvider.otherwise("/nerds");
           
           $stateProvider
             .state('geeks', {
@@ -16,7 +16,16 @@ angular
           .state('nerds', {
             url: '/nerds',
             templateUrl: 'partials/nerd',
-            controller: 'NerdController'
+            controller: 'NerdListController'
+          })          
+          .state('nerds.view', {
+            url: '/view/:id',
+            views: {
+                'detail': {
+                    templateUrl: 'partials/nerds/view',
+                    controller: 'NerdViewController'
+                }
+            }
           })
 /*
     $routeProvider
