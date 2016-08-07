@@ -1,0 +1,7 @@
+.jumbotron.text-center
+  h1 Nerds and Proud
+  a(href="#" editable-text="user.name" e-label="User Name") {{ user.name || 'empty' }}
+
+ul 
+  li(ng-repeat="nerd in nerds") 
+    span {{nerd.name}}    

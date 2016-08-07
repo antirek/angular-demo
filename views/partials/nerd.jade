@@ -1,0 +1,14 @@
+
+h1 Nerds and Proud
+p {{tagline}}
+ 
+ul 
+  li(ng-repeat="nerd in nerds") 
+    a(href="#" editable-text="nerd.name" onaftersave="update(nerd._id, $data)") {{ nerd.name || 'empty' }}
+
+h3 new nerd
+label Name 
+input(type="text" ng-model="name" placeholder="Enter a name here")
+h1 Hello {{name}}!
+
+a(href="" ng-click="create()") save
