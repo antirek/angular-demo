@@ -1,5 +1,5 @@
 angular.module('sampleApp', [
-	'ngRoute', 'appRoutes', 'MainCtrl', 'NerdCtrl', 
+	'ui.router', 'appRoutes', 'MainCtrl', 'NerdCtrl', 
 	'NerdService', 'GeekCtrl', 'GeekService', 'xeditable'
 	])
 .run(function(editableOptions) {

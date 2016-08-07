@@ -1,28 +1,51 @@
-angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular
+    .module('appRoutes', [])
+    .config(['$stateProvider', '$urlRouterProvider', 
+        //function($routeProvider, $locationProvider) {
+          function ($stateProvider, $urlRouterProvider) {
 
-	$routeProvider
+          $urlRouterProvider.otherwise("/nerds");
+          
+          $stateProvider
+            .state('geeks', {
+              url: '/geeks',
+              templateUrl: 'partials/geek'
+            })
 
-		// home page
-		.when('/', {
-			templateUrl: 'partials/home',
-			controller: 'MainController'
-		})
 
-		.when('/nerds', {
-			templateUrl: 'partials/nerd',
-			controller: 'NerdController'
-		})
+          .state('nerds', {
+            url: '/nerds',
+            templateUrl: 'partials/nerd',
+            controller: 'NerdController'
+          })
+/*
+    $routeProvider
 
-		.when('/nerds/edit', {
-			templateUrl: 'partials/nerds/edit',
-			controller: 'NerdController'
-		})
+        // home page
+        .when('/', {
+            templateUrl: 'partials/home',
+            controller: 'MainController'
+        })
 
-		.when('/geeks', {
-			templateUrl: 'partials/geek',
-			controller: 'GeekController'	
-		});
+        .when('/nerds', {
+            templateUrl: 'partials/nerd',
+            controller: 'NerdController'
+        })
 
-	$locationProvider.html5Mode(true);
+        .when('/nerds/edit', {
+            templateUrl: 'partials/nerds/edit',
+            controller: 'NerdController'
+        })
+
+        .when('/geeks', {
+            templateUrl: 'partials/geek',
+            controller: 'GeekController'    
+        });
+
+    $locationProvider.html5Mode(true);
+
+*/
+
+
 
 }]);
