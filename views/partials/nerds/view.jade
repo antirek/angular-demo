@@ -1,4 +1,19 @@
-.jumbotron.text-center
-  h3 Hello
-  //span {{nerd.name}}
-  a(href="#" editable-text="nerd.name" onaftersave="update(nerd._id, $data)") {{ nerd.name || 'empty' }}
+
+h3 Nerd 
+  span {{nerd.name}}
+
+.row
+  .col-md-12
+    a.btn.btn-default(href="#" ng-click="delete($index)") delete
+
+.row
+  .col-md-3
+    p.pull-right Name: 
+  .col-md-9
+    a(href="#" editable-text="nerd.name" onaftersave="update($index, 'name', $data)") {{ nerd.name || 'empty' }}
+
+.row
+  .col-md-3
+    p.pull-right Age: 
+  .col-md-9
+    a(href="#" editable-text="nerd.age" onaftersave="update($index, 'age', $data)") {{ nerd.age || 'empty' }}

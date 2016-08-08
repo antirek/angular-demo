@@ -4,15 +4,21 @@ p {{tagline}}
  
 //ul 
 //  li(ng-repeat="nerd in nerds") 
-//    a(href="#" editable-text="nerd.name" onaftersave="update(nerd._id, $data)") {{ nerd.name || 'empty' }}
+//    a(href="#" editable-text="nerd.name" onaftersave="update($data)") {{ nerd.name || 'empty' }}
+
+.row
+  .col-md-12
+    input(type="text" ng-model="name" placeholder="Enter a name here") 
+    a.btn.btn-default(href="" ng-click="create()") save
 
 .row
   .col-md-3
 
     .list-group
         a.list-group-item(ng-repeat="nerd in nerds"
-          ui-sref="nerds.view({id: nerd._id})"
+          ui-sref="nerds.view({id: $index})"
           ) {{ nerd.name }}
 
   .col-md-9
     div(ui-view="detail")
+

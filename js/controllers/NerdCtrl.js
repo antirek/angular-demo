@@ -1,49 +1,55 @@
 angular
-	.module('NerdCtrl', ['NerdService', 'xeditable'])
-	.controller('NerdListController', [
-		'$scope', 
-		'Nerd', 
-		function($scope, Nerd) {
+    .module('NerdCtrl', ['NerdService', 'xeditable'])
+    .controller('NerdListController', [
+        '$scope', 
+        '$state',
+        'Nerd', 
+        function($scope, $state, Nerd) {
+            $scope.load = function () {
+                Nerd.getAll().success(function(data){       
+                    $scope.nerds = data;
+                });
+            };
 
-			$scope.tagline = 'Nothing beats a pocket protector!';	
-			//$scope.nerds = [{name: 'sad'},{name:'sdsd'}]//Nerd.get();	
+            $scope.create = function () {
+                Nerd.create({name: $scope.name});
+                $scope.load();
+                $state.reload();
+            };
 
-			$scope.load = function () {
-				Nerd.getAll().success(function(data){		
-					$scope.nerds = data;
-				});
-			};
+            $scope.load();
+        }
+    ])
 
-			$scope.create = function () {
-				Nerd.create({name: $scope.name});
-				$scope.load();
-			};
+    .controller('NerdViewController', [
+        '$scope',        
+        '$state',
+        '$stateParams',        
+        'Nerd',
+        function($scope, $state, $stateParams, Nerd) {
 
-			$scope.update = function (id, data) {
-				console.log(id, data);
-				Nerd.update(id, {name: data});
-			};
+            $scope.$index = $stateParams.id;
+            if ($scope.nerds){ 
+                $scope.nerd = $scope.nerds[$scope.$index]; 
+            }else{
+                $state.go('nerds', {}, {reload: true});
+            }         
 
-			$scope.load();
+            $scope.update = function (id, attribute, data) {
+                console.log(id, attribute, data);
+                $scope.nerds[id][attribute] = data;
+                $scope.nerd = $scope.nerds[id];
 
-		}
-	])
-	.controller('NerdViewController', [
-		'$scope',
-		'$state',
-		'$stateParams', 
-		'Nerd',
-		function($scope, $state, $stateParams, Nerd) {
+                Nerd.update($scope.nerd._id, $scope.nerds[id]);
+                //$state.reload();
+            };
 
-			var id = $stateParams.id;
-			Nerd.get(id).success(function (data) {
-				$scope.nerd = data;	
-			});
+            $scope.delete = function (id) {
+                Nerd.delete($scope.nerd._id).success((data) => {
+                    
+                    $state.go('nerds', {}, {reload:true});
 
-			$scope.update = function (id, data) {
-				console.log(id, data);
-				Nerd.update(id, {name: data});
-				$state.reload();
-			};
-		}
-	]);
+                })
+            }
+        }
+    ]);
