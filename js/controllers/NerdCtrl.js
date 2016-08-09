@@ -9,15 +9,25 @@ angular
                 Nerd.getAll().success(function(data){       
                     $scope.nerds = data;
                 });
-            };
-
-            $scope.create = function () {
-                Nerd.create({name: $scope.name});
-                $scope.load();
-                $state.reload();
-            };
+            };            
 
             $scope.load();
+        }
+    ])
+
+    .controller('NerdAddController', [
+        '$scope', 
+        '$state',
+        'Nerd', 
+        function($scope, $state, Nerd) {
+            $scope.create = function () {
+                Nerd.create({name: $scope.name});
+                //$scope.load();
+                //$state.reload();
+                $state.go('nerds', {}, {reload:true});
+            };
+
+            //$scope.load();
         }
     ])
 
