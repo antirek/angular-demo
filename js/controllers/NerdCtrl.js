@@ -22,11 +22,12 @@ angular
     ])
 
     .controller('NerdViewController', [
-        '$scope',        
+        '$scope',
+        '$window',
         '$state',
         '$stateParams',        
         'Nerd',
-        function($scope, $state, $stateParams, Nerd) {
+        function ($scope, $window, $state, $stateParams, Nerd) {
 
             $scope.$index = $stateParams.id;
             if ($scope.nerds){ 
@@ -36,20 +37,20 @@ angular
             }         
 
             $scope.update = function (id, attribute, data) {
-                console.log(id, attribute, data);
+                //console.log(id, attribute, data);
                 $scope.nerds[id][attribute] = data;
                 $scope.nerd = $scope.nerds[id];
 
                 Nerd.update($scope.nerd._id, $scope.nerds[id]);
-                //$state.reload();
             };
 
             $scope.delete = function (id) {
-                Nerd.delete($scope.nerd._id).success((data) => {
-                    
-                    $state.go('nerds', {}, {reload:true});
+                if ($window.confirm("Please confirm?")) {
+                    Nerd.delete($scope.nerd._id).success((data) => {                    
+                        $state.go('nerds', {}, {reload:true});
+                    });
+                }
+            };
 
-                })
-            }
         }
     ]);
