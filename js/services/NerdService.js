@@ -1,7 +1,7 @@
-angular.module('NerdService', []).factory('Nerd', ['$http', function($http) {
+angular.module('NerdService', []).factory('Nerd', ['$resource', function ($resource) {
     let apiUrl = '/api/nerds/';
-
-	  return {
+    /*
+	return {
         // call to get all nerds
         getAll : function() {
         	//console.log($http.get('/api/nerds'));
@@ -30,5 +30,12 @@ angular.module('NerdService', []).factory('Nerd', ['$http', function($http) {
         }
 
     }       
+
+    */
+
+    return $resource(apiUrl + ':id', { 
+            id:'@_id'
+        });
+
 
 }]);

@@ -1,17 +1,13 @@
 angular
-    .module('NerdCtrl', ['NerdService', 'xeditable'])
+    .module('NerdCtrl', ['NerdService'])
     .controller('NerdListController', [
         '$scope', 
         '$state',
         'Nerd', 
-        function($scope, $state, Nerd) {
-            $scope.load = function () {
-                Nerd.getAll().success(function(data){       
-                    $scope.nerds = data;
-                });
-            };            
-
-            $scope.load();
+        function($scope, $state, Nerd) {            
+            Nerd.query(function(data){       
+                $scope.nerds = data;
+            });            
         }
     ])
 
@@ -21,13 +17,10 @@ angular
         'Nerd', 
         function($scope, $state, Nerd) {
             $scope.create = function () {
-                Nerd.create({name: $scope.name});
-                //$scope.load();
-                //$state.reload();
+                var nerd = new Nerd({name: $scope.name});
+                nerd.$save();
                 $state.go('nerds', {}, {reload:true});
             };
-
-            //$scope.load();
         }
     ])
 
@@ -39,24 +32,17 @@ angular
         'Nerd',
         function ($scope, $window, $state, $stateParams, Nerd) {
 
-            $scope.$index = $stateParams.id;
-            if ($scope.nerds){ 
-                $scope.nerd = $scope.nerds[$scope.$index]; 
-            }else{
-                $state.go('nerds', {}, {reload: true});
-            }         
-
+            $scope.nerd = Nerd.get({id: $stateParams.id});
+            
             $scope.update = function (id, attribute, data) {
-                //console.log(id, attribute, data);
-                $scope.nerds[id][attribute] = data;
-                $scope.nerd = $scope.nerds[id];
-
-                Nerd.update($scope.nerd._id, $scope.nerds[id]);
+                $scope.nerd[attribute] = data;
+                $scope.nerd.$save();
+                $state.reload();
             };
 
             $scope.delete = function (id) {
                 if ($window.confirm("Please confirm?")) {
-                    Nerd.delete($scope.nerd._id).success((data) => {                    
+                    Nerd.delete({id: $scope.nerd._id}, () => {                    
                         $state.go('nerds', {}, {reload:true});
                     });
                 }

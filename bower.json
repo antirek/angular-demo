@@ -6,6 +6,7 @@
     "angular": "latest",
     "angular-route": "latest",
     "angular-xeditable": "^0.2.0",
-    "angular-ui-router": "^0.3.1"
+    "angular-ui-router": "^0.3.1",
+    "angular-resource": "^1.5.8"
   }
 }

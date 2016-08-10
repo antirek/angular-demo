@@ -16,7 +16,7 @@ p {{tagline}}
 
     .list-group
         a.list-group-item(ng-repeat="nerd in nerds"
-          ui-sref="nerds.view({id: $index})"
+          ui-sref="nerds.view({id: nerd._id})"
           ) {{ nerd.name }}
 
   .col-md-9
