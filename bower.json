@@ -7,6 +7,7 @@
     "angular-route": "latest",
     "angular-xeditable": "^0.2.0",
     "angular-ui-router": "^0.3.1",
-    "angular-resource": "^1.5.8"
+    "angular-resource": "^1.5.8",
+    "angular-growl-v2": "^0.7.9"
   }
 }

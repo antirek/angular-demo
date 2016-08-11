@@ -1,11 +1,10 @@
 angular
     .module('appRoutes', [])
-    .config(['$stateProvider', '$urlRouterProvider', 
-        //function($routeProvider, $locationProvider) {
-          function ($stateProvider, $urlRouterProvider) {
+    .config([
+        '$stateProvider', 
+        '$urlRouterProvider',        
+          function ($stateProvider, $urlRouterProvider) {          
 
-          //$urlRouterProvider.otherwise("/nerds");
-          
           $stateProvider
             .state('geeks', {
               url: '/geeks',

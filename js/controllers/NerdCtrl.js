@@ -15,11 +15,17 @@ angular
         '$scope', 
         '$state',
         'Nerd', 
-        function($scope, $state, Nerd) {
+        'growl',
+        function($scope, $state, Nerd, growl) {
             $scope.create = function () {
                 var nerd = new Nerd({name: $scope.name});
-                nerd.$save();
-                $state.go('nerds', {}, {reload:true});
+                nerd.$save().then(function () {
+                    growl.info("create success");
+                })
+                .catch(function(err) {
+                    growl.error("error");
+                });
+                $state.go('nerds', {}, {reload:true});               
             };
         }
     ])
@@ -30,22 +36,36 @@ angular
         '$state',
         '$stateParams',        
         'Nerd',
-        function ($scope, $window, $state, $stateParams, Nerd) {
+        'growl',
+        function ($scope, $window, $state, $stateParams, Nerd, growl) {
 
-            $scope.nerd = Nerd.get({id: $stateParams.id});
+            Nerd.get({id: $stateParams.id}).$promise.then(function(nerd) {
+                $scope.nerd = nerd;
+            });
             
             $scope.update = function (id, attribute, data) {
                 $scope.nerd[attribute] = data;
-                $scope.nerd.$save();
+                $scope.nerd.$save().then(function () {
+                    growl.success("update success");
+                })
+                .catch(function(err) {
+                    growl.error("error");
+                });
                 $state.reload();
             };
 
             $scope.delete = function (id) {
+                //console.log($scope);
                 if ($window.confirm("Please confirm?")) {
-                    Nerd.delete({id: $scope.nerd._id}, () => {                    
-                        $state.go('nerds', {}, {reload:true});
-                    });
+                    Nerd.remove({id: $scope.nerd._id}).$promise
+                    .then(() => {
+                        growl.success("remove success");                                         
+                    })
+                    .catch(function(err) {
+                        growl.error("error");
+                    });                    
                 }
+                $state.go('nerds', {}, {reload: true});
             };
 
         }
