@@ -20,7 +20,7 @@ angular
             $scope.create = function () {
                 var nerd = new Nerd({name: $scope.name});
                 nerd.$save().then(function () {
-                    growl.info("create success");
+                    growl.success("create success");
                 })
                 .catch(function(err) {
                     growl.error("error");
@@ -41,7 +41,10 @@ angular
 
             Nerd.get({id: $stateParams.id}).$promise.then(function(nerd) {
                 $scope.nerd = nerd;
-            });
+            })
+            .catch(function(err) {
+                growl.error("error");
+            }); 
             
             $scope.update = function (id, attribute, data) {
                 $scope.nerd[attribute] = data;
