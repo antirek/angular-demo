@@ -11,5 +11,9 @@ module.exports = mongoose.model('Nerd', {
 	age: {
 		type: Number,
 		default: 0
+	},
+	status: {
+		type: Number,
+		default: 0
 	}
 });

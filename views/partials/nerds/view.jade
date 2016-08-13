@@ -17,3 +17,10 @@ h3 Nerd
     p.pull-right Age: 
   .col-md-9
     a(href="#" editable-text="nerd.age" onaftersave="update($index, 'age', $data)") {{ nerd.age || 'empty' }}
+
+.row
+  .col-md-3
+    p.pull-right Status:
+
+  .col-md-9
+    a(href="#" editable-select="nerd.status" onaftersave="update($index, 'status', $data)" e-ng-options="s.value as s.text for s in statuses") {{ showStatus() }}
