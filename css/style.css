@@ -1,1 +1,98 @@
-body { padding-top:30px; }
+html, body {
+  height: 100%;
+}
+body {
+  padding: 50px 0 0 0;
+}
+
+.navmenu {
+  padding-top: 50px;
+}
+
+.navbar {
+  display: block;
+  text-align: center;
+}
+.navbar-brand {
+  display: inline-block;
+  float: none;
+}
+.navbar-toggle {
+  position: absolute;
+  float: left;
+  margin-left: 15px;
+}
+
+.container {
+  max-width: 100%;
+}
+
+@media (min-width: 1px) {
+  .navbar-toggle {
+    display: block !important;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    padding: 0 0 0 300px;
+  }
+  .navmenu {
+    padding-top: 0;
+  }
+  .navbar {
+    display: none !important; /* IE8 fix */
+  }
+}
+
+.left1 {
+	height: calc(100vh - 90px);
+    overflow: auto;
+}
+
+.left2 {
+    height: calc(100vh - 150px);
+    overflow: auto;
+}
+
+.left3 {
+    height: calc(100vh - 210px);
+    overflow: auto;
+    padding-right: 15px; 
+}
+
+
+.left {
+	overflow: auto;
+}
+
+.left::-webkit-scrollbar {
+	width: 2px;
+}
+.left::-webkit-scrollbar-button {
+	width: 2px;
+	height: 0px;
+}
+.left::-webkit-scrollbar-track {
+	background:#eee;
+	border: thin solid lightgray;
+	box-shadow: 0px 0px 0px #dfdfdf inset;
+	border-radius:6px;
+}
+.left::-webkit-scrollbar-thumb {
+	background:lightgray;
+	border: thin solid lightgray;
+	border-radius: 1px;
+}
+.left::-webkit-scrollbar-thumb:hover {
+	background:grey;
+}			
+
+
+ul.nav-stacked ul.nav-stacked > li > a {
+  padding-left: 30px;
+}
+
+.panel-title {
+	margin: 7px 0;
+}

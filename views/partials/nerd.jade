@@ -1,24 +1,28 @@
+br
+.container
+  .row
+      
+      .col-md-4
+        .panel.panel-default    
+          .panel-heading.clearfix
+            .panel-title Nerds
+              | 
+              .btn-group.pull-right
+                a.btn.btn-default.btn-sm(ui-sref="nerds.add" href="#")
+                  span.glyphicon.glyphicon-plus(aria-hidden='true') 
+              
+                a.btn.btn-default.btn-sm
+                  span.glyphicon.glyphicon-search(aria-hidden='true')
 
-h1 Nerds and Proud
-p {{tagline}}
- 
-//ul 
-//  li(ng-repeat="nerd in nerds") 
-//    a(href="#" editable-text="nerd.name" onaftersave="update($data)") {{ nerd.name || 'empty' }}
+          .panel-body search form 
+          
+          ul.list-group.left.left2
+              a.list-group-item(ng-repeat="nerd in nerds"
+                ui-sref="nerds.view({id: nerd._id})"
+                ) {{ nerd.name }}
 
 
-.row
-  .col-md-12    
-    a.btn.btn-default(ui-sref="nerds.add" href="#") add
 
-.row
-  .col-md-3
-
-    .list-group
-        a.list-group-item(ng-repeat="nerd in nerds"
-          ui-sref="nerds.view({id: nerd._id})"
-          ) {{ nerd.name }}
-
-  .col-md-9
-    div(ui-view="detail")
+      .col-md-8
+        div(ui-view="detail")
 
