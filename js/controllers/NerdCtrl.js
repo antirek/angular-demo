@@ -49,8 +49,10 @@ angular
             ];
 
             $scope.showStatus = function () {
-                var selected = $filter('filter')( $scope.statuses, {value: $scope.nerd.status});
-                return ($scope.nerd.status && selected.length) ? selected[0].text : 'Not set';
+                if ($scope.nerd) {
+                    var selected = $filter('filter')( $scope.statuses, {value: $scope.nerd.status});
+                    return ($scope.nerd.status && selected.length) ? selected[0].text : 'Not set';
+                }
             };
 
             Nerd.get({id: $stateParams.id}).$promise.then(function (nerd) {

@@ -45,17 +45,17 @@ body {
   }
 }
 
-.left1 {
+.level1 {
 	height: calc(100vh - 90px);
     overflow: auto;
 }
 
-.left2 {
+.level2 {
     height: calc(100vh - 150px);
     overflow: auto;
 }
 
-.left3 {
+.level3 {
     height: calc(100vh - 210px);
     overflow: auto;
     padding-right: 15px; 
